@@ -20,7 +20,7 @@ public class Member {
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "order_id") // 양방향 참조 시, 연관관계의 주인은 order_id
+    @OneToMany(mappedBy = "member") // 양방향 참조 시, 연관관계의 주인은 order_id
     private List<Order> orders = new ArrayList<>();
 
 }

@@ -11,9 +11,10 @@ public class Address {
     private String street;
     private String zipcode;
 
-    protected Address() { // 불변 객체로 설계해야함
+    protected Address() {
     }
 
+    // 불변 객체로 설계해야함
     public Address(String city, String street, String zipcode) {
         this.city = city;
         this.street = street;
