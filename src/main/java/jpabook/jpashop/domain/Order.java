@@ -80,7 +80,7 @@ public class Order {
     /**
      * 전체 주문 가격 조회
      */
-    public Integer getTotalPrice() {
+    public int getTotalPrice() {
         return this.orderItems.stream().mapToInt(OrderItem::getTotalPrice).sum();
     }
 
