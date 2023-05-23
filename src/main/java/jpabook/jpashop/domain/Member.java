@@ -23,4 +23,10 @@ public class Member {
     @OneToMany(mappedBy = "member") // 양방향 참조 시, 연관관계의 주인은 order_id
     private List<Order> orders = new ArrayList<>();
 
+    public Member(){}
+
+    public Member(String name, Address address) {
+        this.name = name;
+        this.address = address;
+    }
 }
