@@ -20,6 +20,15 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+    // 변경 감지 동작
+    @Transactional
+    public void updateItem(Long itemId, UpdateItemDto dto) {
+        Item item = itemRepository.findOne(itemId); // 영속 상태 Book 얻기
+        item.update(dto.getPrice(), dto.getName(), dto.getStockQuantity());
+        // 트랜잭션 커밋할 때 update 쿼리 날림
+    }
+
+
     public List<Item> findItems() {
         return itemRepository.findAll();
     }

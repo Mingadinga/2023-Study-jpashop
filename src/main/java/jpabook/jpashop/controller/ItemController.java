@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -34,6 +36,22 @@ public class ItemController {
         List<Item> items = itemService.findItems();
         model.addAttribute("items", items);
         return "items/itemList";
+    }
+
+    @GetMapping("/items/{itemId}/edit")
+    public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
+        // user의 id 접근 권한까지 체크 필요
+        Book item = (Book) itemService.findOne(itemId);
+        BookForm form = BookForm.of(item);
+
+        model.addAttribute("form", form);
+        return "items/updateItemForm";
+    }
+
+    @PostMapping("/items/{itemId}/edit")
+    public String updateItem(@PathVariable("itemId") Long itemId, @ModelAttribute("form") BookForm form) {
+        itemService.updateItem(itemId, form.toDto());
+        return "redirect:items";
     }
 
 }

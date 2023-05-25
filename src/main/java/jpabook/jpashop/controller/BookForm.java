@@ -1,6 +1,7 @@
 package jpabook.jpashop.controller;
 
 import jpabook.jpashop.domain.item.Book;
+import jpabook.jpashop.service.UpdateItemDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,5 +25,20 @@ public class BookForm {
         book.setAuthor(author);
         book.setIsbn(isbn);
         return book;
+    }
+
+    public static BookForm of(Book book) {
+        BookForm form = new BookForm();
+        form.setId(book.getId());
+        form.setName(book.getName());
+        form.setPrice(book.getPrice());
+        form.setStockQuantity(book.getStockQuantity());
+        form.setAuthor(book.getAuthor());
+        form.setIsbn(book.getIsbn());
+        return form;
+    }
+
+    public UpdateItemDto toDto() {
+        return new UpdateItemDto(price, name, stockQuantity);
     }
 }
