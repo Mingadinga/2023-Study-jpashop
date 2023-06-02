@@ -20,7 +20,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     // 회원 가입
-    @Transactional(readOnly = false)
+    @Transactional
     public Long join(Member member) {
         validateDuplicateMemberOrElseThrow(member);
         memberRepository.save(member);
@@ -44,5 +44,12 @@ public class MemberService {
     // 회원 단건 조회
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
+    }
+
+    @Transactional
+    public void update(Long id, String name) {
+        Member member = memberRepository.findOne(id); // 영속 상태
+        member.setName(name); // 변경 감지
+        // 커밋되어 변경 감지 반영됨
     }
 }
